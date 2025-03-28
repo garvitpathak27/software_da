@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-hello-world
+  template:
+    metadata:
+      labels:
+        app: flask-hello-world
+    spec:
+      containers:
+      - name: flask-container
+        image: garvitpathak27/hello-world-flask:latest
+        ports:
+          - containerPort: 5000
+        env:
+          - name: APP_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: flask-config
+                key: APP_ENV
+
+          - name: FLASK_DEBUG
+            valueFrom:
+              configMapKeyRef:
+                name: flask-config
+                key: FLASK_DEBUG
