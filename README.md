@@ -125,7 +125,7 @@ kubectl apply -f service.yaml
 View the config YAML file:
 
 ```bash
-cat config.yaml
+cat configmap.yaml
 ```
 
 Apply the ConfigMap:
