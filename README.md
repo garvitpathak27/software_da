@@ -131,7 +131,7 @@ cat configmap.yaml
 Apply the ConfigMap:
 
 ```bash
-kubectl apply -f config.yaml
+kubectl apply -f configmap.yaml
 ```
 
 ### 4. Implement Auto-Scaling (HPA)
