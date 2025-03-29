@@ -25,7 +25,7 @@ This repository demonstrates the end-to-end deployment of a Flask web applicatio
 - Minikube installed and running.
 - kubectl configured for the Minikube cluster.
 - Docker installed for building images.
-- A Docker Hub account (repository: `garvitpathak27/hello-world-flask`).
+- A Docker Hub account (repository: `<your-docker-username>/hello-world-flask`).
 
 ## Assignment Requirements
 
@@ -73,21 +73,21 @@ minikube start
 Clone the repository containing the application code:
 
 ```bash
-git clone https://github.com/garvitpathak27/software_da.git
+git clone https://github.com/<your-docker-username>/software_da.git
 cd software_da
 ```
 
 Build the Docker image:
 
 ```bash
-docker build -t garvitpathak27/hello-world-flask:v1 .
+docker build -t <your-docker-username>/hello-world-flask:v1 .
 ```
 
 Push the container image to Docker Hub:
 
 ```bash
 docker login
-docker push garvitpathak27/hello-world-flask:v1
+docker push <your-docker-username>/hello-world-flask:v1
 ```
 
 ### 3. Create Kubernetes Resources
@@ -154,7 +154,7 @@ kubectl get hpa
 Simulate a rolling update:
 
 ```bash
-kubectl set image deployment/flask-hello-world flask-container=garvitpathak27/hello-world-flask:v2
+kubectl set image deployment/flask-hello-world flask-container=<your-docker-username>/hello-world-flask:v2
 ```
 
 Check the rollout status:
