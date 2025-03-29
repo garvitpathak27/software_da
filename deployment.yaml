@@ -30,6 +30,18 @@ spec:
                 name: flask-config
                 key: FLASK_DEBUG
 
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: flask-secret
+                key: DB_USER
+
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: flask-secret
+                key: DB_PASSWORD
+
         resources:
           requests:
             cpu: "100m"
