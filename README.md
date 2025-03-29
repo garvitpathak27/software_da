@@ -73,7 +73,7 @@ minikube start
 Clone the repository containing the application code:
 
 ```bash
-git clone https://github.com/<your-docker-username>/software_da.git
+git clone https://github.com/garvitpathak27/software_da.git
 cd software_da
 ```
 
