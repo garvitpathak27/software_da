@@ -73,7 +73,7 @@ minikube start
 Clone the repository containing the application code:
 
 ```bash
-git clone https://github.com/garvitpathak27/software_da.git
+git clone https://github.com/<your-docker-username>/software_da.git
 cd software_da
 ```
 
@@ -125,29 +125,78 @@ kubectl apply -f service.yaml
 View the config YAML file:
 
 ```bash
-cat configmap.yaml
+cat config.yaml
 ```
 
 Apply the ConfigMap:
 
 ```bash
-kubectl apply -f configmap.yaml
+kubectl apply -f config.yaml
 ```
 
 ### 4. Implement Auto-Scaling (HPA)
 
-View the HPA YAML file:
+#### Step 1: Verify HPA Exists
+
+Check if the Horizontal Pod Autoscaler (HPA) is already set up:
 
 ```bash
-cat hpa.yaml
+kubectl get hpa
 ```
 
-Apply the Horizontal Pod Autoscaler (HPA):
+If it exists, it should show the current CPU usage and target. If HPA is not set up, you'll need to apply it again using:
 
 ```bash
 kubectl apply -f hpa.yaml
-kubectl get hpa
 ```
+
+#### Step 2: Monitor Current Pod Count
+
+Check how many pods are currently running:
+
+```bash
+kubectl get pods
+```
+
+#### Step 3: Start Load Generator to Trigger Autoscaling
+
+Run a BusyBox container to generate load:
+
+```bash
+kubectl run --rm -it --image=busybox load-generator -- /bin/sh
+```
+
+Inside the BusyBox shell, execute:
+
+```bash
+while true; do wget -q -O- http://flask-hello-world-service:5000; done
+```
+
+This will send continuous requests to the service.
+
+#### Step 4: Observe Autoscaling in Action
+
+In another terminal, monitor the HPA scaling status:
+
+```bash
+kubectl get hpa -w
+```
+
+Also, monitor the number of pods increasing dynamically:
+
+```bash
+kubectl get pods -w
+```
+
+#### Step 5: Stop Load & Check Scale Down
+
+Once you've observed the scaling up, stop the BusyBox load generator by pressing `Ctrl+C`. Then, monitor if the HPA scales down the pods after a while:
+
+```bash
+kubectl get pods -w
+```
+
+This completes the autoscaling test.
 
 ### 5. Rolling Updates & Rollbacks
 
