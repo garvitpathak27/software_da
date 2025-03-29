@@ -29,3 +29,9 @@ spec:
               configMapKeyRef:
                 name: flask-config
                 key: FLASK_DEBUG
+
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "250m"
